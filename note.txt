@@ -1,0 +1,210 @@
+-------------------------可变对象默认值------------------------------------
+def maker(x=[]):
+    x.append(2)
+    print x
+
+maker()#[2]
+maker()#[2, 2]
+-------------------------模拟zip------------------------------------
+def myzip(*args):
+    seqs = [list(arg) for arg in args]
+    res = []
+    while all(seqs):
+        res.append(tuple(seq.pop(0) for seq in seqs))
+    return res
+
+print myzip([1, 2, 3], [2, 3, 4, 5])
+print myzip('abc', 'xyz123')    
+-------------------------模拟map------------------------------------
+def mymap(func, *args):
+    res = []
+    for arg in zip(*args):#解包参数
+        res.append(func(*arg))
+    return res
+    #return [func(*arg) for arg in zip(*args)]
+
+print mymap(abs, range(-2, 2))
+print mymap(pow, [1, 2, 3], [2, 3, 4, 5])
+
+-------------------------生成器------------------------------------
+def gen(n):
+    for i in range(n):
+        yield i**2
+
+x = gen(5)
+print type(x)
+for i in x:
+    print i
+
+-------------------------reduce------------------------------------
+import operator
+print reduce(lambda x, y: x+y, [1,2,3,4])#10
+print reduce(operator.add, [1,2,3,4])#10
+
+---------------------------filter----------------------------------
+print list(filter(lambda x:x > 0, range(-5, 5)))
+
+-------------------------映射函数map----------------------------------
+import sys
+'''
+在序列中映射函数：map
+将列表映射到函数执行
+type(a) = <type 'function'>
+'''
+a = lambda x: map(sys.stdout.write, x)
+a(['hello ', 'world', '!', '\n'])#打印hello world!
+
+inc = lambda x: x + 10
+b = lambda x: list(map(inc, x))
+print b([1, 2, 3, 4])#打印[11, 12, 13, 14]
+
+print map(pow, [1, 2 ,3], [2, 3, 4])#1**2, 2**3, 3**4
+
+-------------------------解包参数----------------------------------
+def func(a, b, c=3, d=4):
+    print a, b, c, d
+
+func(1, *(5, 6))#解包参数
+func(**{'a':1, 'b':2, 'c':3, 'd':4})
+#1 5 6 4
+#1 2 3 4
+-------------------------cmd模块----------------------------------
+import cmd, sys
+
+class CLI(cmd.Cmd):
+    def __init__(self):
+        cmd.Cmd.__init__(self)
+        self.prompt = '>'
+        
+    def do_hello(self, msg):
+        print 'msg: ', msg
+
+    def help_hello(self):
+        print 'usage: hello [msg]'
+
+    '''
+    每个重载的函数都有固定的参数self
+    定义的方法必须有且只有一个参数arg
+    使用*args 传递多个参数，参数用逗号分隔
+    '''
+    def do_quit(self, *args):
+        print args
+        sys.exit(1)
+
+    def help_quit(self):
+        print 'usage: quit'
+
+    do_q = do_quit
+
+cla = CLI()
+cla.cmdloop()
+
+-------------------------重载__call__----------------------------------
+class H():
+    def __init__(self, start):
+        self.state = start
+        
+    def __call__(self, msg):
+        print self.state, msg
+        self.state += 1
+
+f = H(0)
+f('hello')
+f('world')
+
+-------------------------默认参数i=i----------------------------------
+def maker():
+    acts=[]
+    for i in range(5):
+        acts.append(lambda x, i=i: i**x)#不加上i=i只保存最后一个i值，即4
+    return acts
+acts = maker()
+for i in range(5):
+    print acts[i](2)
+
+-------------------------工厂函数----------------------------------
+def maker(n):
+    def f(x):
+        return x**n
+    return f
+action = maker(2)
+for i in range(6):
+    print action(i)
+
+-------------------------struct 存储、解析二进制数据----------------------------------
+
+import struct
+
+f=open('data.bin', 'wb')
+bindata=struct.pack('>i4sh', 7, 'hello', 8)
+print bindata
+f.write(bindata)
+f.close()
+
+f=open('data.bin', 'rb')
+bindata=f.read()
+data=struct.unpack('>i4sh', bindata)
+print data
+
+-------------------------使用pickle 模块存取对象----------------------------------
+import pickle
+
+d = {'a':1, 'b':2, 'c':3}
+f = open('data.txt', 'wb')
+pickle.dump(d, f)
+f.close()
+
+f=open('data.txt', 'rb')
+obj = pickle.load(f)
+print obj
+
+-------------------------对象存取----------------------------------
+x, y, z = 43, 44, 56
+s = 'Spam'
+d = {'a':1, 'b':2}
+li = [1, 2, 3]
+
+#转换为字符串以保存对象
+f = open('data.txt', 'w')
+f.write('%s,%s,%s\n' %(x, y, z))
+f.write(s+'\n')
+f.write(str(li)+'$'+str(d))
+f.close()
+
+#读取对象，int 转换为数字
+f=open('data.txt')
+line = f.readline()
+parts=line.split(',')
+numbers = [int(part) for part in parts]
+print numbers
+
+line = f.readline()    
+s=line.rstrip()
+print s
+
+#使用eval 转换对象
+line = f.readline()
+parts=line.split('$')
+objects = [eval(part) for part in parts]
+print objects
+
+-------------------------共享引用----------------------------------
+>>> a=['sapm']
+>>> b=a	#a 与b 指向同一对象，对b 的修改同时影响了a 
+>>> b[0]='jiji'
+>>> a
+['jiji']
+>>> b
+['jiji']
+
+-------------------------模块的搜索路径----------------------------------
+>>> import sys
+>>> sys.path
+['', 'C:\\Python27\\Lib\\idlelib', 'C:\\Windows\\system32\\python27.zip', 'C:\\Python27\\DLLs', 'C:\\Python27\\lib', 'C:\\Python27\\lib\\plat-win', 'C:\\Python27\\lib\\lib-tk', 'C:\\Python27', 'C:\\Python27\\lib\\site-packages']
+
+
+
+print '\a'
+响铃
+
+
