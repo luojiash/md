@@ -9,3 +9,27 @@
 
 紧接着魔数的4个字节存储的是Class文件的版本号；第s和第6个字节是次版本号
 （Minor Version）.第7和第8个字节是主版本号（Major Version）。
+
+
+## JVM内存结构
+
+- 程序计数器
+- Java虚拟机栈
+- 本地方法栈（Native Method Stack）
+- 堆
+- 方法区
+- 直接内存
+
+本地方法栈和Java虚拟机栈非常相似，区别是虚拟机栈为执行Java方法服务，本地方法栈为
+执行Native方法服务。HotSpot将本地方法栈和虚拟机栈合二为一。
+
+Java虚拟机永久代（Permanent Generation）
+: 在HotSpot虚拟机中，使用永久代实现*方法区*，这将GC扩展至方法区，省去专门为方法区
+  编写内存管理代码的工作。`-XX:MaxPermSize`设置方法区的最大空间。Java8移除了永久代，
+  由MetaspaceSize代替，使用`-XX:MaxMetaspaceSize`设置最大空间。
+
+字符串常量池
+: All literal strings and string-valued constant expressions are interned.
+  类被使用/方法被调用时，其中的字符串字面量才会被放到常量池。JDK 1.6及之前的版本中，
+  常量池分配在永久代，而永久代的大小是固定的，所以很容易引发OutOfMemoryException。
+  JDK 1.7之后常量池分配到堆中。
