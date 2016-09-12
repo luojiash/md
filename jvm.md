@@ -33,3 +33,19 @@ Java虚拟机永久代（Permanent Generation）
   类被使用/方法被调用时，其中的字符串字面量才会被放到常量池。JDK 1.6及之前的版本中，
   常量池分配在永久代，而永久代的大小是固定的，所以很容易引发OutOfMemoryException。
   JDK 1.7之后常量池分配到堆中。
+
+
+## 垃圾回收算法
+
+GC根对象
+- 当前执行方法中的所有本地变量及入参
+- 活跃线程
+- 已加载类中的静态变量
+- JNI引用
+
+
+## JVM命令
+
+java -XX:+PrintFlagsFinal
+
+jinfo -flags [PID]

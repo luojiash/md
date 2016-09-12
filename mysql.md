@@ -78,3 +78,9 @@ char使用定长存储字符串，适合存储固定长度的值，比如密码�
 ## text
 
 排序时只对最前的max_sort_length字节进行排序。
+
+
+Row_format
+: 对于MyISAM表，可选的值为Dynamic、Fixed、Compressed。Dynamic的行长度是可变的，
+  包含可变长度的字段，如varchar。Fixed的行长度是固定的，只包含固定长度的列。Compressed
+  的行只在压缩列表中存在。

@@ -23,11 +23,11 @@
   必须是唯一的。Redis在两个地方用到了跳跃表：一个是实现有序集合键，另一个是在集群
   节点中用作内部数据结构。
 
-整数集合
+整数集合（intset）
 :
 
 压缩列表（ziplist）
-: 用于实现集合、有序集合、哈希。
+: 用于实现列表、有序集合、哈希。
 
 
 ## 对象
@@ -35,7 +35,9 @@
 字符串
 列表
 哈希
+
 集合
+编码是intset或hashtable
 
 有序集合（zset）
 1. 使用ziplist实现
@@ -46,7 +48,7 @@
 ## 命令行
 
 集群模式连接Redis
-redis-cli -p7000 -c
+redis-cli -p 7000 -c
 `-c` Enable cluster mode (follow -ASK and -MOVED redirections).
 
 > OBJECT ENCODING msg
