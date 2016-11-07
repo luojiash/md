@@ -8,3 +8,5 @@ CAS(Central Authentication Service)是SSO的一种实现。
 http://steven-wiki.readthedocs.org/en/latest/security/sso/
 ST在一段时间内失效.
 CAS规定Service Ticket只能存活一定的时间，然后CAS Server会让它失效.
+
+[使用 CAS 在 Tomcat 中实现单点登录](https://www.ibm.com/developerworks/cn/opensource/os-cn-cas/)
