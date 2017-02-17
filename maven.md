@@ -92,7 +92,10 @@ Maven有三套相互独立的生命周期，每套生命周期包含不同的阶
 清理项目，default生命周期的目的是构建项目，site生命周期的目的是建立项目站点。
 
 > clean: pre-clean, clean, post-clean
-> default: validate, initialize, generate-source...
+> default: validate, initialize, generate-source, process-resources, compile, process-classes,
+  generate-test-sources, process-test-sources, generate-test-resources, process-test-resources,
+  test-compile, process-test-classes, test, prepare-package, package, pre-integration-test,
+  integration-test, post-integration-test, verify, install, deploy
 > site: pre-site, site, post-site, site-deploy
 
 ### 插件目标
