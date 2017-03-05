@@ -84,3 +84,31 @@ Row_format
 : 对于MyISAM表，可选的值为Dynamic、Fixed、Compressed。Dynamic的行长度是可变的，
   包含可变长度的字段，如varchar。Fixed的行长度是固定的，只包含固定长度的列。Compressed
   的行只在压缩列表中存在。
+
+
+##慢查询
+```sql
+mysql> show variables like 'slow_query_log';
++----------------+-------+
+| Variable_name  | Value |
++----------------+-------+
+| slow_query_log | OFF   |
++----------------+-------+
+1 row in set (0.00 sec)
+```
+
+慢查询分析工具
+1. mysqldumpslow -h
+2. pt-query-digest
+
+##explain
+using filesort, using temprary 需要优化
+
+##count(id)
+id为null的行不会被计入总数
+
+##子查询
+join or in, exist?
+
+---
+查询语句之后用`\G`代替`;`，可以格式化结果

@@ -52,3 +52,10 @@ redis-cli -p 7000 -c
 `-c` Enable cluster mode (follow -ASK and -MOVED redirections).
 
 > OBJECT ENCODING msg
+
+
+
+Redis分布式锁
+SET lock_key "locked" EX lock_timeout NX
+
+NX表示当且仅当lock_key不存在才设置，EX设置超时时间

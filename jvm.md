@@ -49,3 +49,7 @@ GC根对象
 java -XX:+PrintFlagsFinal
 
 jinfo -flags [PID]
+
+java -XX:+PrintCommandLineFlags
+
+java -XX:+PrintFlagsInitial
