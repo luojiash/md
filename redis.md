@@ -32,16 +32,16 @@
 
 ## 对象
 
-字符串
-列表
-哈希
+字符串：字符串
+列表：压缩列表、双向列表
+哈希：压缩列表、字典
 
 集合
-编码是intset或hashtable
+编码是整数集合（intset）或字典（hashtable）
 
 有序集合（zset）
-1. 使用ziplist实现
-2. 使用skiplist和dict实现
+1. 使用压缩列表（ziplist）实现
+2. 使用跳跃表（skiplist）和字典（dict）实现
 
 
 
