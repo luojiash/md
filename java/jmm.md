@@ -43,6 +43,9 @@ final 域在 JMM 中有特殊的语义，final 域能确保初始化过程的安
 是线程安全的，多线程下不会得到未初始化完成的 SafeStates 对象，若 states 不是 final，
 则可能得到未初始化完成的对象。可以理解为 final 域的写入和对象引用赋值给一个变量有
 happens-before 的关系。
+
+可见final和volatile实现了相同的内存语义。
+
 ```
 public class SafeStates {
 	private final Map<String, String> states;
