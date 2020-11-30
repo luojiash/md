@@ -1,14 +1,12 @@
-#Apache Maven
-tags: maven
+# Apache Maven
 
----
-##什么是 Apache Maven
+## 什么是 Apache Maven
 
 Maven 是一个软件项目管理和构建工具，由 Apache 软件基金会开发。
 
-##Maven 如何工作
+## Maven 如何工作
 
-###目录结构
+### 目录结构
 
 Maven 项目的默认目录结构：
 | 目录 | 目的 |
@@ -21,7 +19,7 @@ Maven 项目的默认目录结构：
 
 Maven 项目会生成 .class 文件，存放在${basedir}/target/classes. 
 
-###pom.xml
+### pom.xml
 Maven 项目使用项目对象模型（Project Object Model, POM）来配置，POM 存储在 pom.xml 文件中，这个文件用于描述项目信息、管理依赖关系、配置插件。
 
 一个 pom.xml 的例子：
@@ -49,7 +47,7 @@ Maven 项目使用项目对象模型（Project Object Model, POM）来配置，P
 </project>
 ```
 
-###依赖范围
+### 依赖范围
 
 Maven 根据依赖关系`<dependencies>`从 maven 库下载程序（比如Jar 包），Windows 的下载路径是%UserProfile%\.m2\repository. 
 `<scope>` 决定了依赖关系的适用范围，例子里的`test`表示这个依赖关系只有在执行
@@ -86,7 +84,7 @@ A依赖于B，B依赖于C，A对B是第一直接依赖，B对C是第二直接依
 | provided | provided | -  | provided | provided |
 | runtime | runtime | -    | -        | runtime |
 
-###生命周期和插件目标
+### 生命周期和插件目标
 
 Maven有三套相互独立的生命周期，每套生命周期包含不同的阶段。clean生命周期的目的是
 清理项目，default生命周期的目的是构建项目，site生命周期的目的是建立项目站点。
@@ -104,10 +102,10 @@ maven-dependency-plugin有十多个目标，每个目标对应一个功能。dep
 冒号前面是插件前缀，冒号后面是插件目标。一个插件目标绑定生命周期的一个或多个阶段，
 比如maven-clean-plugin:clean绑定clean生命周期的clean阶段。
 
-
-##安装Maven
+## 安装Maven
 下载Maven 压缩包，解压，设根目录为\${mavendir}, Path 环境变量添加 ${mavendir}\bin. 比如我添加了D:\apache-maven-3.1.1\bin. 
 查看版本信息，出现以下结果说明安装成功了。
+
 ```
 C:\Users\hp>mvn -v
 Apache Maven 3.1.1 (0728685237757ffbf44136acec0402957f723d9a; 2013-09-17 23:22:22+0800)
@@ -118,7 +116,7 @@ Default locale: zh_CN, platform encoding: GBK
 OS name: "windows 7", version: "6.1", arch: "amd64", family: "windows"
 ```
 
-##使用方法
+## 使用方法
 
 - 使用eclipse插件
 - 命令行
