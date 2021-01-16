@@ -39,3 +39,7 @@ select * from t_user where city = 'SZ' order by age;
 8. `like`查询值以通配符`%`开头无法使用索引
 9. 字符串不加引号（类型转换）无法使用索引
 10. `or`可能使索引失效
+
+[MySQL索引原理及慢查询优化 - 美团技术团队](https://tech.meituan.com/2014/06/30/mysql-index.html)
+
+[万字总结：学习MySQL优化原理，这一篇就够了！](https://dbaplus.cn/news-155-1531-1.html)

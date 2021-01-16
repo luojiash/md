@@ -17,6 +17,14 @@ final boolean isShared() {
 }
 ```
 
+AQS内部有几个关键变量：
+
+- head，队列头节点，使用一个dummy node表示
+- tail，队列尾节点
+- state，同步状态值
+
+head和tail初始都为null，队列初始化后指向同一个dummy node。
+
 ### 获取独占锁
 
 调用 acquire、acquireInterruptibly、tryAcquireNanos 获取独占锁，这些方法都调用了 tryAcquire（由子类实现）。
