@@ -12,6 +12,8 @@ SELECT @@tx_isolation;
 SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE}
 ```
 
+公司实践：READ-COMMITTED + binlog_format=ROW。READ-COMMITTED没有间隙锁，降低死锁发生的概率，减少锁等待时间，并发性能更高。
+
 | 隔离级别 | 脏读（Dirty Read） | 不可重复读（NonRepeatable Read） | 幻读（Phantom Read） |
 |-|-|-|-|
 | 未提交读（Read uncommitted）| 可能   | 可能   | 可能 |
@@ -30,14 +32,5 @@ SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMM
 SELECT * FROM person LOCK IN SHARE MODE;
 ```
 
-###3、幻读
-事务B 修改了数据并提交，事务A 看不到这些修改（select 查不到），但修改实际已经生效了。[^f1]比如事务B 插入一条数据并提交，事务A update 所有数据，就会多了事务B 刚插入的一条数据，而之前是没有这条数据的。再比如事务B 插入一条数据并提交，事务A 插入相同的数据，则会出现Duplicate entry 错误（假设有主键）。
-
-
----
 参考资料：
 [MySQL 四种事务隔离级的说明 - jyzhou - 博客园](http://www.cnblogs.com/zhoujinyi/p/3437475.html)
-[Innodb中的事务隔离级别和锁的关系 - 美团技术团队](http://tech.meituan.com/innodb-lock.html)
-
-
-[^f1]: 理解仍有误差，仅参考。
