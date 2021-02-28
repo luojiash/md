@@ -1,6 +1,6 @@
 ## WAL(Write-Ahead Logging)
 
-磁盘随机读写很耗费性能，所以引入了WAL技术，即先写日志，再写原始数据。写日志采用顺序写，相比随机IO性能提高很多。
+磁盘随机读写很耗费性能，所以引入了WAL技术，即先写日志，再写原始数据。写日志采用顺序写，另外还引入了组提交机制对多个事务的日志批量刷盘，相比随机IO性能提高很多。
 
 InnoDB的日志文件称为redo log，ib_logfile_0、ib_logfile_1这些就是redo log文件，redo log文件总大小是固定的。
 
@@ -10,7 +10,7 @@ write pos：当前redo log写入的位置，随着redo log的写入不断前移�
 
 ## binlog
 
-redo log是InnoDB引擎特有的日志，提供crash-safe的能力（崩溃恢复）。MySQL Server层也有自己的日志，称为binlog（归档日志）。binlog常用于数据恢复、主从复制等场景。
+redo log是InnoDB引擎特有的日志，提供crash-safe的能力（崩溃恢复），保证事务**持久性**。MySQL Server层也有自己的日志，称为binlog（归档日志）。binlog常用于数据恢复、主从复制等场景。
 
 redo log和binlog对比：
 
